@@ -1,0 +1,9 @@
+[package]
+
+name = "truebit_client"
+version = "0.0.1"
+authors = [ "Harley Swick hdswick@gmail.com" ]
+
+[dependencies]
+web3 = "0.1.0"
+rustc-hex = "1.0.0"
