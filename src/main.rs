@@ -5,6 +5,7 @@ use web3::futures::Future;
 use web3::contract::{Contract, Options};
 use web3::types::{Address, U256};
 use rustc_hex::FromHex;
+use std::time;
 
 fn main() {
   let (_eloop, transport) = web3::transports::Http::new("http://localhost:8545").unwrap();
@@ -21,6 +22,9 @@ fn main() {
   let bytecode: Vec<u8> = include_str!("../build/SimpleStorage.bin").from_hex().unwrap();
   // Deploying a contract
   let contract = Contract::deploy(web3.eth(), include_bytes!("../build/SimpleStorage.abi")).unwrap()
+    .confirmations(4)
+    .poll_interval(time::Duration::from_secs(10))
+    .options(Options::with(|mut opt| opt.gas = Some(3_000_000.into())))
     .execute(bytecode, (), accounts[0])
     .unwrap()
   	.wait()
