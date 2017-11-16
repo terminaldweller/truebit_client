@@ -22,7 +22,7 @@ fn main() {
   let bytecode: Vec<u8> = include_str!("../build/SimpleStorage.bin").from_hex().unwrap();
   // Deploying a contract
   let contract = Contract::deploy(web3.eth(), include_bytes!("../build/SimpleStorage.abi")).unwrap()
-    .confirmations(4)
+    .confirmations(0)
     .poll_interval(time::Duration::from_secs(10))
     .options(Options::with(|mut opt| opt.gas = Some(3_000_000.into())))
     .execute(bytecode, (), accounts[0])
