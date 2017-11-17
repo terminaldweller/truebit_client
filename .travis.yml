@@ -1,0 +1,11 @@
+os: osx
+osx_image: xcode7.2
+language: rust
+rust:
+  - stable
+
+install:
+  - brew install parity -y
+
+script:
+  - cargo run
